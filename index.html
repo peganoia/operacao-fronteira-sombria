@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Operação</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+background:#050505;
+color:#eee;
+font-family:Consolas,monospace;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+overflow:hidden;
+}
+body:before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle,#1a1a1a,#050505 70%);
+animation:pulse 6s infinite;
+}
+@keyframes pulse{
+50%{transform:scale(1.03)}
+}
+.box{
+position:relative;
+z-index:2;
+width:min(900px,92%);
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.1);
+padding:40px;
+backdrop-filter:blur(8px);
+}
+h1{
+text-align:center;
+letter-spacing:8px;
+font-weight:normal;
+margin-bottom:20px;
+}
+#timer{
+font-size:58px;
+text-align:center;
+margin-bottom:30px;
+}
+#line{
+height:1px;
+background:#444;
+margin:25px 0;
+}
+#text{
+white-space:pre-wrap;
+line-height:1.8;
+font-size:18px;
+min-height:330px;
+}
+.cursor{
+animation:blink .8s infinite;
+}
+@keyframes blink{
+50%{opacity:0}
+}
+footer{
+margin-top:25px;
+text-align:center;
+font-size:13px;
+color:#777;
+letter-spacing:2px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>INÍCIO DA OPERAÇÃO</h1>
+
+<div id="timer"></div>
+
+<div id="line"></div>
+
+<div id="text"></div>
+
+<footer>TRANSMISSÃO SEGURA</footer>
+
+</div>
+
+<script>
+
+const alvo = new Date("2026-07-11T20:30:00-03:00");
+
+function atualizar(){
+
+let d = alvo - new Date();
+
+if(d < 0){
+document.getElementById("timer").innerHTML="00:00:00";
+return;
+}
+
+let h = Math.floor(d/1000/60/60);
+let m = Math.floor(d/1000/60)%60;
+let s = Math.floor(d/1000)%60;
+
+timer.innerHTML=
+String(h).padStart(2,"0")+":"+
+String(m).padStart(2,"0")+":"+
+String(s).padStart(2,"0");
+
+}
+
+setInterval(atualizar,1000);
+atualizar();
+
+const msg=`O momento chegou.
+
+Meses de informações desencontradas, contatos infiltrados e movimentações silenciosas finalmente convergem para um único ponto.
+
+A partir de agora, cada decisão terá consequências, cada aliança poderá ser colocada à prova e cada passo poderá mudar o rumo da operação.
+
+Quando o relógio marcar a hora, não haverá mais espaço para dúvidas.
+
+Apenas estratégia, coragem e determinação.
+
+Que os preparados prevaleçam, que os erros sejam poucos e que a sorte acompanhe aqueles que estiverem dispostos a arriscar tudo.
+
+Boa sorte a todos.
+
+A operação está oficialmente iniciada.`;
+
+let i=0;
+
+function escrever(){
+
+if(i<=msg.length){
+
+text.innerHTML=msg.substring(0,i)+"<span class='cursor'>█</span>";
+
+i++;
+
+setTimeout(escrever,28);
+
+}else{
+
+text.innerHTML=msg;
+
+}
+
+}
+
+escrever();
+
+</script>
+
+</body>
+</html>
